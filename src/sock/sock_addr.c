@@ -500,10 +500,11 @@ sock_inet_ntop (lua_State *L)
   char buf[48];
 
   if (is_ip4) {
-    lua_Number n = lua_tonumber(L, 1);
+    const lua_Number num = lua_tonumber(L, 1);
+
     in_len = 4;
     af = AF_INET;
-    ip4 = htonl((unsigned long) n);
+    ip4 = htonl((unsigned long) num);
     src = (const char *) &ip4;
   } else {
     src = sock_checkladdr(L, 1, &in_len, &af);

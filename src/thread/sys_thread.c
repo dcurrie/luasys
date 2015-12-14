@@ -1,15 +1,5 @@
 /* Lua System: Threading */
 
-#ifndef luai_writestringerror
-/* For Lua 5.3 compatibility; copied from Lua 5.2 luaconf.h */
-/*
-@@ luai_writestringerror defines how to print error messages.
-** (A format string with one argument is enough for Lua...)
-*/
-#define luai_writestringerror(s,p) \
-        (fprintf(stderr, (s), (p)), fflush(stderr))
-#endif
-
 #ifdef _WIN32
 
 #include <process.h>
@@ -647,7 +637,7 @@ thread_error_abort (lua_State *L)
    ? lua_tostring(L, -1) : NULL;
 
   if (!msg) msg = "(error object is not a string)";
-  luai_writestringerror("%s\n", msg);
+  lua_writestringerror("%s\n", msg);
   abort();
 }
 
